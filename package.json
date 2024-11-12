@@ -1,0 +1,17 @@
+{
+    "name": "CICD-Website",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "jest",
+      "test:coverage": "jest --coverage"
+    },
+    "author": "Murilo Ramalho da Mata",
+    "author2": "Camila Gomes da Silva Casa",
+    "license": "ISC",
+    "devDependencies": {
+      "jest": "^29.0.0"
+    }
+  }
+  
