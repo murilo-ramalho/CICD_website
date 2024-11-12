@@ -7,36 +7,51 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
     }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
     h2 {
+      text-align: center;
       color: #333;
     }
-    form {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    .form-group {
+      margin-bottom: 20px;
     }
-    label {
+
+    .form-group label {
       display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
+      color: #555;
     }
-    input {
+
+    .form-group input {
       width: 100%;
       padding: 8px;
-      margin-bottom: 12px;
-      border: 1px solid #ddd;
+      margin-top: 5px;
+      border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 14px;
     }
-    button {
+
+    #errorMessage {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #signupButton {
       width: 100%;
       padding: 10px;
       background-color: #4CAF50;
@@ -46,32 +61,31 @@
       font-size: 16px;
       cursor: pointer;
     }
-    button:hover {
+
+    #signupButton:hover {
       background-color: #45a049;
-    }
-    p {
-      color: red;
-      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <h2>Cadastro de Usuário</h2>
-  
-  <form id="signupForm">
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" placeholder="Digite seu e-mail" required><br>
-    
-    <label for="password">Senha:</label>
-    <input type="password" id="password" placeholder="Digite sua senha" required><br>
-    
-    <label for="confirmPassword">Confirmar Senha:</label>
-    <input type="password" id="confirmPassword" placeholder="Confirme sua senha" required><br>
-    
-    <button type="button" id="signupButton">Cadastrar</button>
-  </form>
 
-  <p id="errorMessage" style="color: red;"></p>
+  <div class="container">
+    <h2>Cadastro de Usuário</h2>
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirmar Senha</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    <div id="errorMessage"></div>
+    <button id="signupButton">Cadastrar</button>
+  </div>
 
   <script src="../js/cadastro.js"></script>
 </body>

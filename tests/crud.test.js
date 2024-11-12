@@ -19,7 +19,7 @@ describe("Funções de Cadastro de Usuário", () => {
 
   test("deve validar e-mail único", () => {
     const email = "novo@exemplo.com";
-    expect(isEmailUnique(email)).toBe(true);
+    expect(isEmailUnique(email)).toBe(true); 
 
     localStorage.setItem('users', JSON.stringify([{ email: "teste@exemplo.com" }]));
     expect(isEmailUnique("teste@exemplo.com")).toBe(false);
@@ -70,7 +70,7 @@ describe("Funções de Cadastro de Usuário", () => {
 
       const storedUser = JSON.parse(localStorage.getItem('users'))[1];
       expect(storedUser.email).toBe(email);
-      expect(decryptPassword(storedUser.password)).toBe(password); // Verificando a senha descriptografada
+      expect(decryptPassword(storedUser.password)).toBe(password);
     }
   });
 });

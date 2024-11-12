@@ -1,21 +1,17 @@
-// Função para verificar se o e-mail é único
 function isEmailUnique(email) {
   const users = JSON.parse(localStorage.getItem('users') || '[]');
   return !users.some(user => user.email === email);
 }
 
-// Função para validar a força da senha
 function isPasswordStrong(password) {
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   return passwordPattern.test(password);
 }
 
-// Função para verificar se as senhas coincidem
 function doPasswordsMatch(password, confirmPassword) {
   return password === confirmPassword;
 }
 
-// Função para criptografar a senha
 const CryptoJS = require("crypto-js");
 
 function encryptPassword(password) {
@@ -27,7 +23,6 @@ function decryptPassword(encryptedPassword) {
   return bytes.toString(CryptoJS.enc.Utf8);
 }
 
-// Função para realizar o cadastro
 function cadastrarUsuario() {
   const email = document.getElementById('email').value;
   const senha = document.getElementById('password').value;
@@ -62,7 +57,6 @@ function cadastrarUsuario() {
 
 document.getElementById('signupButton').addEventListener('click', cadastrarUsuario);
 
-// Exportando as funções para testes
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     isEmailUnique,
