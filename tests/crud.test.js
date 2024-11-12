@@ -3,8 +3,7 @@ const {
   isPasswordStrong,
   doPasswordsMatch,
   encryptPassword,
-  decryptPassword,
-  init
+  decryptPassword
 } = require('../src/js/cadastro');
 
 global.localStorage = {
@@ -12,26 +11,15 @@ global.localStorage = {
   setItem: jest.fn()
 };
 
-// Mock do DOM
-global.document = {
-  getElementById: jest.fn().mockImplementation((id) => {
-    if (id === 'email') return { value: "novo@exemplo.com" };
-    if (id === 'password') return { value: "Password123!" };
-    if (id === 'confirmPassword') return { value: "Password123!" };
-    if (id === 'errorMessage') return { textContent: "" };
-    if (id === 'signupButton') return { addEventListener: jest.fn() };
-  })
-};
-
 describe("Funções de Cadastro de Usuário", () => {
-
+  
   beforeEach(() => {
     localStorage.clear();
   });
 
   test("deve validar e-mail único", () => {
     const email = "novo@exemplo.com";
-    expect(isEmailUnique(email)).toBe(true);
+    expect(isEmailUnique(email)).toBe(true); 
 
     localStorage.setItem('users', JSON.stringify([{ email: "teste@exemplo.com" }]));
     expect(isEmailUnique("teste@exemplo.com")).toBe(false);
@@ -74,7 +62,6 @@ describe("Funções de Cadastro de Usuário", () => {
     const password = "Password123!";
     const confirmPassword = "Password123!";
 
-    // Testando o cadastro
     if (isEmailUnique(email) && isPasswordStrong(password) && doPasswordsMatch(password, confirmPassword)) {
       const user = { email, password: encryptPassword(password) };
       const users = JSON.parse(localStorage.getItem('users') || '[]');
@@ -85,10 +72,5 @@ describe("Funções de Cadastro de Usuário", () => {
       expect(storedUser.email).toBe(email);
       expect(decryptPassword(storedUser.password)).toBe(password);
     }
-  });
-
-  test("deve chamar a função de inicialização", () => {
-    init();
-    expect(document.getElementById('signupButton').addEventListener).toHaveBeenCalledWith('click', expect.any(Function));
   });
 });
