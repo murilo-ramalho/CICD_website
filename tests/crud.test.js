@@ -1,9 +1,23 @@
 beforeEach(() => {
-  localStorage.clear();
+  let store = {};
+  
+  global.localStorage = {
+    clear: () => {
+      store = {};
+    },
+    getItem: (key) => {
+      return store[key] || null;
+    },
+    setItem: (key, value) => {
+      store[key] = value.toString();
+    },
+    removeItem: (key) => {
+      delete store[key];
+    }
+  };
 });
 
 describe("CRUD de Usuários", () => {
-
   test("Deve cadastrar um novo usuário", () => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const newUser = { email: "teste@teste.com", password: "123456" };
@@ -59,18 +73,16 @@ describe("CRUD de Usuários", () => {
     const users = [{ email: "teste@teste.com", password: "123456" }];
     localStorage.setItem("users", JSON.stringify(users));
 
-    const newUser = { email: "teste@teste.com", password: "novaSenha" };
+    const newUser = { email: "teste@teste.com", password: "789123" };
     users.push(newUser);
 
-    const emailExists = users.some(user => user.email === newUser.email);
-    expect(emailExists).toBe(true);
+    const userExists = users.some(user => user.email === newUser.email);
+    expect(userExists).toBe(true);
   });
 
   test("Deve verificar se as senhas coincidem ao cadastrar", () => {
     const password = "123456";
     const confirmPassword = "123456";
-
     expect(password).toBe(confirmPassword);
   });
-
 });
