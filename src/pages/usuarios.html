@@ -89,11 +89,16 @@
     #logoutButton:hover {
       background-color: #e0a800;
     }
+
+    #message {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <h2>Lista de Usuários</h2>
-  
+  <h2>Usuários Cadastrados</h2>
   <table id="usersTable">
     <thead>
       <tr>
@@ -102,23 +107,19 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Os usuários serão inseridos aqui via JavaScript -->
     </tbody>
   </table>
 
-  <form id="editForm" style="display:none;">
-    <h3>Editar Usuário</h3>
-    <label for="editEmail">Email:</label>
-    <input type="email" id="editEmail" required>
-    
-    <label for="editPassword">Nova Senha:</label>
-    <input type="password" id="editPassword" required>
-    
-    <button type="submit">Salvar</button>
-    <button type="button" id="cancelEdit">Cancelar</button>
+  <div id="message"></div>
+  
+  <form id="addUserForm">
+    <h3>Adicionar Novo Usuário</h3>
+    <input type="email" id="newEmail" placeholder="Email" required>
+    <input type="password" id="newPassword" placeholder="Senha" required>
+    <button type="submit">Adicionar Usuário</button>
   </form>
 
-  <button id="logoutButton">Logout</button>
+  <button id="logoutButton">Sair</button>
 
   <script src="../js/usuarios.js"></script>
 </body>
