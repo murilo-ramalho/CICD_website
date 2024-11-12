@@ -2,16 +2,24 @@
     "name": "CICD-Website",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "src/js/index.js",
     "scripts": {
+      "start": "node src/js/index.js",
       "test": "jest",
+      "test:watch": "jest --watch",
       "test:coverage": "jest --coverage"
     },
-    "author": "Murilo Ramalho da Mata",
-    "author2": "Camila Gomes da Silva Casa",
+    "keywords": [
+      "javascript",
+      "jest",
+      "localstorage",
+      "crud"
+    ],
+    "author": "",
     "license": "ISC",
     "devDependencies": {
       "jest": "^29.0.0"
-    }
+    },
+    "dependencies": {}
   }
   
