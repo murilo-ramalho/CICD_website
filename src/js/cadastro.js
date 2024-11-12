@@ -11,7 +11,6 @@ function isPasswordStrong(password) {
 function doPasswordsMatch(password, confirmPassword) {
   return password === confirmPassword;
 }
-
 const CryptoJS = require("crypto-js");
 
 function encryptPassword(password) {
@@ -55,7 +54,9 @@ function cadastrarUsuario() {
   alert('Usuário cadastrado com sucesso!');
 }
 
-document.getElementById('signupButton').addEventListener('click', cadastrarUsuario);
+function init() {
+  document.getElementById('signupButton').addEventListener('click', cadastrarUsuario);
+}
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
@@ -63,6 +64,7 @@ if (typeof module !== 'undefined' && module.exports) {
     isPasswordStrong,
     doPasswordsMatch,
     encryptPassword,
-    decryptPassword
+    decryptPassword,
+    init
   };
 }
