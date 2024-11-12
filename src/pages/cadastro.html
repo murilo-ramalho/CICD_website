@@ -1,91 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Usuário</title>
+  <title>Cadastro</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
     }
-
-    .container {
-      width: 100%;
-      max-width: 400px;
-      margin: 50px auto;
-      background: #fff;
+    form {
+      background-color: #fff;
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
+      width: 300px;
       text-align: center;
-      color: #333;
     }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
+    label, input {
       display: block;
-      color: #555;
-    }
-
-    .form-group input {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      margin-bottom: 10px;
     }
-
-    #errorMessage {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    #signupButton {
-      width: 100%;
+    input {
       padding: 10px;
-      background-color: #4CAF50;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background-color: #28a745;
       color: white;
       border: none;
-      border-radius: 4px;
-      font-size: 16px;
+      border-radius: 3px;
       cursor: pointer;
     }
-
-    #signupButton:hover {
-      background-color: #45a049;
+    button:hover {
+      background-color: #218838;
+    }
+    p {
+      margin-top: 10px;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    #error-message {
+      color: red;
+      display: none;
     }
   </style>
 </head>
 <body>
+  <form id="cadastroForm">
+    <h2>Cadastro</h2>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
 
-  <div class="container">
-    <h2>Cadastro de Usuário</h2>
-    <div class="form-group">
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Senha</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <div class="form-group">
-      <label for="confirmPassword">Confirmar Senha</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" required>
-    </div>
-    <div id="errorMessage"></div>
-    <button id="signupButton">Cadastrar</button>
-  </div>
+    <label for="password">Senha:</label>
+    <input type="password" id="password" required>
+
+    <label for="confirmPassword">Confirmar Senha:</label>
+    <input type="password" id="confirmPassword" required>
+
+    <div id="error-message"></div>
+    <button type="submit">Cadastrar</button>
+    <p>Já tem uma conta? <a href="./login.html">Login</a></p>
+  </form>
 
   <script src="../js/cadastro.js"></script>
 </body>
