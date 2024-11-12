@@ -1,27 +1,74 @@
-document.getElementById("cadastroForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-  
-  if (password !== confirmPassword) {
-    document.getElementById("error-message").textContent = "As senhas não coincidem!";
-    document.getElementById("error-message").style.display = "block";
+// Função para verificar se o e-mail é único
+function isEmailUnique(email) {
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  return !users.some(user => user.email === email);
+}
+
+// Função para validar a força da senha
+function isPasswordStrong(password) {
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return passwordPattern.test(password);
+}
+
+// Função para verificar se as senhas coincidem
+function doPasswordsMatch(password, confirmPassword) {
+  return password === confirmPassword;
+}
+
+// Função para criptografar a senha
+const CryptoJS = require("crypto-js");
+
+function encryptPassword(password) {
+  return CryptoJS.AES.encrypt(password, 'secretKey').toString();
+}
+
+function decryptPassword(encryptedPassword) {
+  const bytes = CryptoJS.AES.decrypt(encryptedPassword, 'secretKey');
+  return bytes.toString(CryptoJS.enc.Utf8);
+}
+
+// Função para realizar o cadastro
+function cadastrarUsuario() {
+  const email = document.getElementById('email').value;
+  const senha = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+
+  if (!isEmailUnique(email)) {
+    document.getElementById('errorMessage').textContent = 'E-mail já cadastrado!';
     return;
   }
 
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-  
-  if (users.find(user => user.email === email)) {
-    document.getElementById("error-message").textContent = "Este e-mail já está cadastrado!";
-    document.getElementById("error-message").style.display = "block";
+  if (!isPasswordStrong(senha)) {
+    document.getElementById('errorMessage').textContent = 'Senha fraca. A senha deve conter ao menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.';
     return;
   }
 
-  users.push({ email, password });
-  localStorage.setItem("users", JSON.stringify(users));
-  
-  alert("Usuário cadastrado com sucesso!");
-  window.location.href = "login.html";
-});
+  if (!doPasswordsMatch(senha, confirmPassword)) {
+    document.getElementById('errorMessage').textContent = 'As senhas não coincidem!';
+    return;
+  }
+
+  const user = {
+    email,
+    password: encryptPassword(senha)
+  };
+
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  users.push(user);
+  localStorage.setItem('users', JSON.stringify(users));
+
+  alert('Usuário cadastrado com sucesso!');
+}
+
+document.getElementById('signupButton').addEventListener('click', cadastrarUsuario);
+
+// Exportando as funções para testes
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    isEmailUnique,
+    isPasswordStrong,
+    doPasswordsMatch,
+    encryptPassword,
+    decryptPassword
+  };
+}
